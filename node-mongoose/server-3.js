@@ -60,7 +60,6 @@ db.once('open', function(){
               });
             });
 
-
           });
 
       }, 3000);
