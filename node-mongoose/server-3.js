@@ -13,7 +13,8 @@ db.once('open', function(){
 
   console.log('Connected succesfully to the server');
 
-  Dishes.create({
+  Dishes.create(
+      {
     name: 'Uthapizza',
     image: 'images/uthapizza.jpg',
     category: 'Appetizer',
