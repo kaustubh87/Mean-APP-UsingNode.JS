@@ -12,8 +12,10 @@
     "assert": "^1.4.1",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-session": "^1.15.0",
     "mongodb": "^2.2.21",
     "mongoose": "^4.7.7",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "session-file-store": "^1.0.0"
   }
 }
