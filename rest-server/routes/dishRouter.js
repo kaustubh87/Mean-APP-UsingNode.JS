@@ -117,4 +117,48 @@ dishRouter.route('/:dishId/comments')
     });
 });
 
+dishRouter.route('/:dishId/comments/:commentId')
+.get(function(req,res,next){
+
+    Dishes.findById(req.params.dishId, function(err, dish){
+      if(err) throw err;
+
+      res.json(dish.comments.id(req.params.commentId));
+    });
+
+})
+.put(function(req,res,next){
+// Delete the existing comment and then update the comment with the new comment
+  Dishes.findById(req.params.dishId, function(err, dish){
+    if(err) throw err;
+
+    dish.comments.id(req.params.commentId).remove();
+
+    dish.comments.push(req.body);
+
+    dish.save(function(err, dish){
+        if(err) throw err;
+        console.log('Updated Comments!');
+        console.log(dish);
+        res.json(dish);
+    });
+
+
+  });
+
+})
+
+.delete(function(req,res,next){
+
+    Dishes.findById(req.params.dishId, function(err, dish){
+        dish.comments.id(req.params.commentId).remove();
+
+        dish.save(function(err, response){
+          if(err) throw err;
+
+          res.json(response);
+        });
+    });
+});
+
 module.exports = dishRouter;

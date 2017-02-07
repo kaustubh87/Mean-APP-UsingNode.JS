@@ -41,7 +41,8 @@ var dishSchema = new Schema({
       required: true
   },
   label :{
-      default : ""
+      type: String,
+      required: true
   },
   price: {
       type: Currency
