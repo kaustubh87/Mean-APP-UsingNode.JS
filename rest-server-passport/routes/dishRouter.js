@@ -2,13 +2,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Dishes = require('../models/dishes');
+var Verify = require('./verify');
 
 var dishRouter = express.Router();
 dishRouter.use(bodyParser.json());
 
 dishRouter.route('/')
-
-.get(function(req,res,next){
+.get(Verify.verifyOrdinaryUser, function(req,res,next){
 
   Dishes.find({}, function(err, dish){
     if(err) throw err;
@@ -16,7 +16,7 @@ dishRouter.route('/')
   });
 
 })
-.post(function(req,res,next){
+.post(Verify.verifyOrdinaryUser, function(req,res,next){
 
   Dishes.create(req.body, function(err, dish){
     if(err) throw err;
@@ -32,7 +32,7 @@ dishRouter.route('/')
 
 })
 
-.delete(function(req,res,next){
+.delete(Verify.verifyOrdinaryUser, function(req,res,next){
   res.end('Deleting all dishes')
   Dishes.remove({}, function(err, response){
     if(err) throw err;

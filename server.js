@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var hostname = 'localhost';
-var port = 4300;
+var port = 8000;
 
 var dishRouter = require('./dishRouter.js');
 var promoRouter = require('./promoRouter.js');
