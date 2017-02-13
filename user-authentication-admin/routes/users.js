@@ -5,7 +5,7 @@ var User = require('../models/user');
 var Verify    = require('./verify');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/users', function(req, res, next) {
   res.send('respond with a resource');
 });
 
@@ -20,8 +20,6 @@ router.post('/register', function(req, res) {
         });
     });
 });
-
-
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
@@ -56,6 +54,5 @@ router.get('/logout', function(req, res) {
     status: 'Bye!'
   });
 });
-
 
 module.exports = router;

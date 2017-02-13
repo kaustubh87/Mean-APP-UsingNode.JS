@@ -26,6 +26,7 @@ exports.verifyOrdinaryUser = function (req, res, next) {
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
+
                 next();
             }
         });
@@ -36,4 +37,19 @@ exports.verifyOrdinaryUser = function (req, res, next) {
         err.status = 403;
         return next(err);
     }
+};
+
+exports.verifyAdmin = function(req,res,next){
+
+  var admin_flag = req.decoded._doc.admin;
+  console.log(admin_flag);
+  if(admin_flag){
+  next();
+}
+else {
+  var err = new Error("You are not authorized");
+  err.status = 403;
+  return next(err);
+}
+
 };
