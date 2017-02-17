@@ -56,7 +56,7 @@ dishRouter.route('/:dishId')
 
 })
 
-.put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,res,next){
+.put(Verify.verifyOrdinaryUser, function(req,res,next){
 
   Dishes.findByIdAndUpdate(req.params.dishId, {
     $set: req.body
@@ -105,7 +105,7 @@ dishRouter.route('/:dishId/comments')
     });
 })
 
-.delete(Verify.verifyAdmin, function(req,res,next){
+.delete(function(req,res,next){
 
     Dishes.findById(req.params.dishId, function(err, dish){
         if(err) throw err;
