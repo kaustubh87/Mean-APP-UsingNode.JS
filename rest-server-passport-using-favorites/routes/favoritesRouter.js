@@ -18,11 +18,28 @@ favoritesRouter.route('/')
 
 })
 .post(Verify.verifyOrdinaryUser, function(req,res,next){
-  Favorites.create(req.body,function(err, favorites){
-    var dish_id = req.body.dish_id;
-    favorites.dishes.push(dish_id);
+  //req.body.postedBy = req.decoded._doc._id;
+  //console.log(req.body.postedBy);
+  var Favorite = new Favorites({
+    postedBy : req.decoded._doc._id
+
+  });
+
+  Favorite.save(function(err, fav){
+    if(err)
+    {
+      throw err;
+    }
+    res.json(fav);
+  });
+
+  /*Favorites.create(,function(err, favorites){
+    req.body.postedBy = req.decoded._doc._id;
+    console.log(req.body.postedBy);
+    favorites.dishes.push(req.body);
     res.json(favorites);
   });
+  */
 });
 
 
