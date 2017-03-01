@@ -18,18 +18,21 @@ favoritesRouter.route('/')
 
 })
 .post(Verify.verifyOrdinaryUser, function(req,res,next){
+
+  var id = req.body._id;
+  //console.log(id);
   //req.body.postedBy = req.decoded._doc._id;
   //console.log(req.body.postedBy);
   var Favorite = new Favorites({
     postedBy : req.decoded._doc._id
-
   });
-
-  Favorite.save(function(err, fav){
+  Favorite.dishes.push(req.body);
+  Favorite.save(id, function(err, fav){
     if(err)
     {
       throw err;
     }
+
     res.json(fav);
   });
 
