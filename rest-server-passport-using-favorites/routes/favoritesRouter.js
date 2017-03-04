@@ -26,12 +26,13 @@ favoritesRouter.route('/')
   var Favorite = new Favorites({
     postedBy : req.decoded._doc._id
   });
-  Favorite.dishes.push(req.body);
+
   Favorite.save(id, function(err, fav){
     if(err)
     {
       throw err;
     }
+    fav.dishes.push(req.body);
 
     res.json(fav);
   });
