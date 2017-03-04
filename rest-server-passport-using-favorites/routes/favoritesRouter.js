@@ -33,17 +33,16 @@ favoritesRouter.route('/')
       throw err;
     }
     fav.dishes.push(req.body);
-
     res.json(fav);
   });
 
-  /*Favorites.create(,function(err, favorites){
+  Favorites.create(,function(err, favorites){
     req.body.postedBy = req.decoded._doc._id;
     console.log(req.body.postedBy);
     favorites.dishes.push(req.body);
     res.json(favorites);
   });
-  */
+
 });
 
 
