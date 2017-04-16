@@ -21,13 +21,22 @@ favoritesRouter.route('/')
 
   var id = req.body._id;
   //console.log(id);
-  //req.body.postedBy = req.decoded._doc._id;
-  //console.log(req.body.postedBy);
   var Favorite = new Favorites({
-    postedBy : req.decoded._doc._id
+    postedBy : req.decoded._doc._id,
+    dish: id
+
+})
+.delete(Verify.verifyOrdinaryUser, function(req,res,next){
+
+  res.end('Deleting all Favorites')
+  Favorites.remove({}, function(err, response){
+    if(err) throw err;
+    res.json(response);
   });
 
-  Favorite.save(id, function(err, fav){
+});
+
+Favorites.create(Favorite, function(err, fav){
     if(err)
     {
       throw err;
@@ -36,14 +45,19 @@ favoritesRouter.route('/')
     res.json(fav);
   });
 
-  Favorites.create(,function(err, favorites){
-    req.body.postedBy = req.decoded._doc._id;
-    console.log(req.body.postedBy);
-    favorites.dishes.push(req.body);
-    res.json(favorites);
+
+});
+
+favoritesRouter.route('/:dishId')
+.delete(function(req,res,next){
+
+  Favorites.findByIdAndRemove(req.params.dishId, function(err, response){
+    if(err) throw err;
+    res.json(response);
   });
 
 });
+
 
 
 module.exports = favoritesRouter;
